@@ -1,11 +1,11 @@
-// src/App.js
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "./AuthContext";
 
 function App() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [token, setToken] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const { token, setToken } = useContext(AuthContext);
 
   const handleLogin = async () => {
     try {
@@ -15,7 +15,6 @@ function App() {
       });
       console.log(response.data);
       setToken(response.data);
-      localStorage.setItem("token", response.data);
     } catch (error) {
       console.error("Login failed:", error);
     }
@@ -24,9 +23,7 @@ function App() {
   const handleFetchData = async () => {
     try {
       const response = await axios.get("http://localhost:3003/api/", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
       console.log("Data:", response.data);
     } catch (error) {

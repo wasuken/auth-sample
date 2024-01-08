@@ -34,10 +34,13 @@ class Login extends ResourceController
     $verify = password_verify($this->request->getVar('password'), $user['password_hash']);
     if(!$verify) return $this->fail('Wrong Password');
 
+    $nowDate = new \DateTime('now');
+    $expiredDate = new \DateTime('now');
+    $expiredDate->modify('+12 hours');
     $key = getenv('app.jwt.privatekey');
     $payload = array(
-      "iat" => 1356999524,
-      "nbf" => 1357000000,
+      "iat" => $expiredDate->getTimestamp(),
+      "nbf" => $nowDate->getTimestamp(),
       "uid" => $user['id'],
       "email" => $user['email']
     );

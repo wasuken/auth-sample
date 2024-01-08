@@ -39,6 +39,7 @@ class Auth implements FilterInterface
     try {
       JWT::decode($token, new Key($key, 'HS256'));
     } catch (\Throwable $th) {
+      log_message('error', $th);
       return Services::response()
         ->setJSON(['msg' => 'Invalid Token'])
         ->setStatusCode(ResponseInterface::HTTP_UNAUTHORIZED);

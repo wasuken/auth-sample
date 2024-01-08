@@ -10,5 +10,4 @@ $routes->group('api', function($routes){
   $routes->get('/', 'Home::index', ['filter' => 'auth']);
   $routes->post('register', 'Register::index');
   $routes->post('login', 'Login::index');
-  $routes->get('me', 'Me::index');
 });

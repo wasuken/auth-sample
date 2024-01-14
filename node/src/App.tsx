@@ -5,8 +5,10 @@ import ProtectedRoute from "./ProtectedRoute";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Login from "./pages/Login";
+import useAuth from "@/useAuth";
 
 function App() {
+  const { logout } = useAuth();
   return (
     <Router>
       <Routes>
@@ -16,6 +18,7 @@ function App() {
           element={
             <ProtectedRoute>
               <div>test</div>
+              <button onClick={logout}>logout</button>
             </ProtectedRoute>
           }
         />

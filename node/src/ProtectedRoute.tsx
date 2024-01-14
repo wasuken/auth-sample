@@ -3,9 +3,9 @@ import { Navigate } from "react-router-dom";
 import useAuth from "./useAuth";
 
 const ProtectedRoute = ({ children }) => {
-  const { token, isTokenExpired } = useAuth();
+  const { isLogin } = useAuth();
 
-  if (!token || isTokenExpired(token)) {
+  if (!isLogin) {
     return <Navigate to="/login" />;
   }
 

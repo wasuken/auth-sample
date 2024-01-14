@@ -34,7 +34,9 @@ const useAuth = () => {
     return currentTime > iat;
   };
 
-  return { token, login, logout, isTokenExpired };
+  const isLogin = !isTokenExpired(token);
+
+  return { token, login, logout, isTokenExpired, isLogin };
 };
 
 export default useAuth;

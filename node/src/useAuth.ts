@@ -28,10 +28,10 @@ const useAuth = () => {
     }
 
     const payload = JSON.parse(atob(token.split(".")[1]));
-    const exp = payload.exp;
+    const iat = payload.iat;
     const currentTime = Math.floor(Date.now() / 1000);
 
-    return currentTime > exp;
+    return currentTime > iat;
   };
 
   return { token, login, logout, isTokenExpired };
